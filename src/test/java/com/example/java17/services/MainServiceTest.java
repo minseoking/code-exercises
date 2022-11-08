@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class MainServiceImplTest {
+class MainServiceTest {
 
     @Autowired
     private MainService mainService;
@@ -19,7 +18,7 @@ class MainServiceImplTest {
     private MainRepository mainRepository;
 
     @Test
-    void findMainDtoById() {
+    void findMainDtoByIdTest() {
         Main main = Main.builder()
                 .name("test")
                 .build();
