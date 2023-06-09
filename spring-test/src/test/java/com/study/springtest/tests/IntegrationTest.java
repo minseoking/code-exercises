@@ -28,7 +28,7 @@ public class IntegrationTest {
         Long orderIdentity = orderService.createOrder(order);
 
         // then
-        Long saveId = orderRepository.findById(orderIdentity);
+        Long saveId = orderRepository.findById(orderIdentity).getId();
         assertThat(saveId).isEqualTo(orderIdentity);
     }
 }

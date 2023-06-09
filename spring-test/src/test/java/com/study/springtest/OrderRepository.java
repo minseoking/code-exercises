@@ -10,9 +10,8 @@ public class OrderRepository {
 
     private Map<Long, Order> orderMap = new HashMap<>();
 
-    public Long findById(Long orderIdentity) {
-        Order order = orderMap.get(orderIdentity);
-        return order.getId();
+    public Order findById(Long orderIdentity) {
+        return orderMap.get(orderIdentity);
     }
 
     public Long save(Order order) {
