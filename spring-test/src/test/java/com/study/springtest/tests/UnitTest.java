@@ -1,10 +1,10 @@
 package com.study.springtest.tests;
 
 import com.study.springtest.Menu;
+import com.study.springtest.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,19 +33,5 @@ public class UnitTest {
         assertThat(order.getMenus().size()).isEqualTo(3);
     }
 
-    private class Order {
-        private List<Menu> menus = new ArrayList<>();
-
-        public List<Menu> getMenus() {
-            return menus;
-        }
-
-        public void addMenu(Menu menu) {
-            menus.add(menu);
-        }
-        public Order(List<Menu> menus) {
-            this.menus.addAll(menus);
-        }
-    }
 }
 
