@@ -1,5 +1,6 @@
 package com.study.springtest.tests;
 
+import com.study.springtest.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,22 +31,6 @@ public class UnitTest {
         order.addMenu(new Menu("돈까스"));
 
         assertThat(order.getMenus().size()).isEqualTo(3);
-    }
-
-    private class Menu {
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public Menu(String name) {
-            this.name = name;
-        }
-
-        public void changeMenu(String name) {
-            this.name = name;
-        }
     }
 
     private class Order {
