@@ -100,4 +100,34 @@ public class SingletonTest {
             assertEquals(values.get(i), values.get(i - 1));
         }
     }
+
+    @Test
+    @DisplayName("레이지 홀더 싱글톤 테스트")
+    public void lazyHolderSingletonTest() throws InterruptedException {
+        int numThreads = 5;
+        CountDownLatch latch = new CountDownLatch(numThreads);
+
+        List<Thread> threads = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+        for (int i = 0; i < numThreads; i++) {
+            Thread thread = new Thread(() -> {
+                values.add(LazyHolderSingleton.getInstance().value);
+
+                latch.countDown();
+            });
+            threads.add(thread);
+        }
+        for (Thread thread : threads) {
+            thread.start();
+        }
+
+        latch.await();
+
+        System.out.println(values);
+        for (int i = 1; i < numThreads; i++) {
+            System.out.println(values.get(i - 1));
+            System.out.println(values.get(i));
+            assertEquals(values.get(i), values.get(i - 1));
+        }
+    }
 }
