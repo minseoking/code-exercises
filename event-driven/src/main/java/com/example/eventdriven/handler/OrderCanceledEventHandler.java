@@ -19,7 +19,7 @@ public class OrderCanceledEventHandler {
     //@EventListener(OrderCanceledEvent.class)
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, classes = OrderCanceledEvent.class)
     public void handle(OrderCanceledEvent orderCanceledEvent) throws Exception {
-        refundService.refund(orderCanceledEvent.getOrderId());
+        refundService.refund(orderCanceledEvent.getOrderId(), orderCanceledEvent.isThrowException());
     }
 
 }

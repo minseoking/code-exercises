@@ -27,11 +27,11 @@ public class OrderServiceTest {
     }
 
     @Test
-    @DisplayName("주문 취소 테스트")
-    void cancelOrderTest() {
+    @DisplayName("주문 취소 성공 테스트")
+    void successCancelOrderTest() {
         Order order = orderRepository.findTop1ByOrderByIdDesc();
         try {
-            orderService.cancel(order.getId());
+            orderService.cancel(order.getId(), false);
         } catch (Exception ignored) {
 
         }
@@ -39,4 +39,16 @@ public class OrderServiceTest {
         assertThat(orderResult).isNull();
     }
 
+    @Test
+    @DisplayName("주문 취소 실패 테스트")
+    void failCancelOrderTest() {
+        Order order = orderRepository.findTop1ByOrderByIdDesc();
+        try {
+            orderService.cancel(order.getId(), true);
+        } catch (Exception ignored) {
+
+        }
+        Order orderResult = orderRepository.findById(order.getId()).orElse(null);
+        assertThat(orderResult).isNotNull();
+    }
 }
