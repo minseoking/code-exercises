@@ -1,19 +1,19 @@
 package com.example.eventdriven.service;
 
 import com.example.eventdriven.entity.Order;
+import com.example.eventdriven.entity.RefundLog;
 import com.example.eventdriven.repository.OrderRepository;
+import com.example.eventdriven.repository.RefundLogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.event.RecordApplicationEvents;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatRuntimeException;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
 public class OrderServiceTest {
 
     @Autowired
@@ -21,6 +21,8 @@ public class OrderServiceTest {
 
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private RefundLogRepository refundLogRepository;
 
     @BeforeEach
     void setUp() {
@@ -38,7 +40,9 @@ public class OrderServiceTest {
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
+        RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
         assertThat(orderResult).isNull();
+        assertThat(refundLog).isNotNull();
     }
 
     @Test
@@ -52,6 +56,8 @@ public class OrderServiceTest {
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
+        RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
         assertThat(orderResult).isNotNull();
+        assertThat(refundLog).isNotNull();
     }
 }
