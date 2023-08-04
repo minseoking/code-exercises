@@ -1,6 +1,7 @@
 package com.example.eventdriven.service;
 
 import com.example.eventdriven.entity.Order;
+import com.example.eventdriven.event.OrderCanceledEvent;
 import com.example.eventdriven.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -14,7 +15,6 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ApplicationEventPublisher applicationEventPublisher;
-    private final RefundService refundService;
 
     @Transactional
     public void cancel(Long orderId, boolean isThrowException) {
@@ -22,8 +22,6 @@ public class OrderService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 주문이 존재하지 않습니다."));
         orderRepository.delete(order);
 
-        refundService.refund(orderId, isThrowException);
-
-//        applicationEventPublisher.publishEvent(new OrderCanceledEvent(orderId));
+        applicationEventPublisher.publishEvent(new OrderCanceledEvent(orderId, isThrowException));
     }
 }

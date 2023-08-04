@@ -10,9 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatRuntimeException;
 
 @SpringBootTest
-//@Transactional
+@Transactional
 public class OrderServiceTest {
 
     @Autowired
@@ -29,12 +30,13 @@ public class OrderServiceTest {
     @Test
     @DisplayName("주문 취소 성공 테스트")
     void successCancelOrderTest() {
+        // given
         Order order = orderRepository.findTop1ByOrderByIdDesc();
-        try {
-            orderService.cancel(order.getId(), false);
-        } catch (Exception ignored) {
 
-        }
+        // when
+        orderService.cancel(order.getId(), false);
+
+        // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
         assertThat(orderResult).isNull();
     }
@@ -42,12 +44,13 @@ public class OrderServiceTest {
     @Test
     @DisplayName("주문 취소 실패 테스트")
     void failCancelOrderTest() {
+        // given
         Order order = orderRepository.findTop1ByOrderByIdDesc();
-        try {
-            orderService.cancel(order.getId(), true);
-        } catch (Exception ignored) {
 
-        }
+        // when
+        assertThatRuntimeException().isThrownBy(() -> orderService.cancel(order.getId(), true));
+
+        // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
         assertThat(orderResult).isNotNull();
     }

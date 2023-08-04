@@ -3,8 +3,8 @@ package com.example.eventdriven.event;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class OrderCanceledEvent {
 
     private final long timestamp;
