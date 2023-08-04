@@ -15,6 +15,7 @@ public class OrderCanceledEventHandler {
 
     private final RefundService refundService;
 
+    @Async
     @EventListener(OrderCanceledEvent.class)
     public void handle(OrderCanceledEvent orderCanceledEvent) {
         refundService.refund(orderCanceledEvent.getOrderId(), orderCanceledEvent.isThrowException());

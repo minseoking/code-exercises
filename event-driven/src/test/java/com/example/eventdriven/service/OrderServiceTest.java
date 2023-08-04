@@ -52,12 +52,12 @@ public class OrderServiceTest {
         Order order = orderRepository.findTop1ByOrderByIdDesc();
 
         // when
-        assertThatRuntimeException().isThrownBy(() -> orderService.cancel(order.getId(), true));
+        orderService.cancel(order.getId(), true);
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
         RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
-        assertThat(orderResult).isNotNull();
+        assertThat(orderResult).isNull();
         assertThat(refundLog).isNotNull();
     }
 }
