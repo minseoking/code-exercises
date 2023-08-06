@@ -2,12 +2,16 @@ package com.example.eventdriven.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class OrderCanceledEvent {
 
-    private final long timestamp;
+    private long timestamp;
     private Long orderId;
     private boolean isThrowException;
 

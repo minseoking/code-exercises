@@ -7,6 +7,7 @@ import com.example.eventdriven.repository.RefundLogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,6 +24,9 @@ public class OrderServiceTest {
     @Autowired
     private RefundLogRepository refundLogRepository;
 
+    @Autowired
+    protected RabbitTemplate rabbitTemplate;
+
     @BeforeEach
     void setUp() {
         orderRepository.save(new Order());
@@ -30,12 +34,14 @@ public class OrderServiceTest {
 
     @Test
     @DisplayName("주문 취소 성공 테스트")
-    void successCancelOrderTest() {
+    void successCancelOrderTest() throws InterruptedException {
         // given
         Order order = orderRepository.findTop1ByOrderByIdDesc();
 
         // when
         orderService.cancel(order.getId(), false);
+
+        Thread.sleep(1000);
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
@@ -46,12 +52,14 @@ public class OrderServiceTest {
 
     @Test
     @DisplayName("주문 취소 실패 테스트")
-    void failCancelOrderTest() {
+    void failCancelOrderTest() throws InterruptedException {
         // given
         Order order = orderRepository.findTop1ByOrderByIdDesc();
 
         // when
         orderService.cancel(order.getId(), true);
+
+        Thread.sleep(1000);
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);

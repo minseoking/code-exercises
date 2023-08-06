@@ -25,9 +25,12 @@ spring:
           use_jdbc_metadata_defaults: false
 
 rabbitmq:
-  queue.name: sample.queue
-  exchange.name: sample.exchange
-  routing.key: sample.key
+  queue:
+    name: sample.queue
+  exchange:
+    name: sample.exchange
+  routing:
+    key: sample.key
 
 # Log Level ??
 logging:

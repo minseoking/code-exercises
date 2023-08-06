@@ -11,7 +11,6 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.converter.MessageConverter;
 
 @Configuration
 public class RabbitMQConfig {
@@ -84,17 +83,15 @@ public class RabbitMQConfig {
         return connectionFactory;
     }
 
-    /**
-     * RabbitTemplate을 생성하여 반환
-     *
-     * @param connectionFactory RabbitMQ와의 연결을 위한 ConnectionFactory 객체
-     * @return RabbitTemplate 객체
-     */
+    @Bean
+    public Jackson2JsonMessageConverter jsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
+
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        // JSON 형식의 메시지를 직렬화하고 역직렬할 수 있도록 설정
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setMessageConverter(jsonMessageConverter());
         return rabbitTemplate;
     }
 }
