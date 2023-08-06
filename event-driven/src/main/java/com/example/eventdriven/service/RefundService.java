@@ -16,7 +16,7 @@ public class RefundService {
 
     private final RefundLogRepository refundLogRepository;
 
-    @RabbitListener(queues = "${rabbitmq.queue.name}")
+//    @RabbitListener(queues = "${rabbitmq.queue.name}")
     public void refund(OrderCanceledEvent event) {
         refundLogRepository.save(new RefundLog(event.getOrderId()));
 

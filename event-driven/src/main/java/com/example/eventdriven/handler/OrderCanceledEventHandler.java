@@ -14,11 +14,12 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @RequiredArgsConstructor
 public class OrderCanceledEventHandler {
 
-    private final MessageService messageService;
+    private final RefundService refundService;
 
     @Async
-    @EventListener(OrderCanceledEvent.class)
+    @TransactionalEventListener(classes = OrderCanceledEvent.class, phase = TransactionPhase.AFTER_COMMIT)
+//    @EventListener(OrderCanceledEvent.class)
     public void handle(OrderCanceledEvent orderCanceledEvent) {
-        messageService.sendMessage(orderCanceledEvent);
+        refundService.refund(orderCanceledEvent);
     }
 }

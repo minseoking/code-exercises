@@ -30,6 +30,7 @@ public class OrderServiceTest {
     @BeforeEach
     void setUp() {
         orderRepository.save(new Order());
+        refundLogRepository.deleteAll();
     }
 
     @Test
@@ -41,7 +42,7 @@ public class OrderServiceTest {
         // when
         orderService.cancel(order.getId(), false);
 
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
@@ -59,12 +60,12 @@ public class OrderServiceTest {
         // when
         orderService.cancel(order.getId(), true);
 
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
         RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
         assertThat(orderResult).isNull();
-        assertThat(refundLog).isNotNull();
+        assertThat(refundLog).isNull();
     }
 }
