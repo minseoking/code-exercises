@@ -1,6 +1,7 @@
 package com.example.eventdriven.service;
 
 import com.example.eventdriven.event.OrderCanceledEvent;
+import com.example.eventdriven.event.OrderCanceledMessageEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -20,7 +21,7 @@ public class MessageService {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void sendMessage(OrderCanceledEvent message) {
+    public void sendMessage(OrderCanceledMessageEvent message) {
         rabbitTemplate.convertAndSend(exchangeName, routingKey, message);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.eventdriven.handler;
 
+import com.example.eventdriven.event.OrderCanceledAsyncEvent;
 import com.example.eventdriven.event.OrderCanceledEvent;
+import com.example.eventdriven.event.OrderCanceledMessageEvent;
 import com.example.eventdriven.service.MessageService;
 import com.example.eventdriven.service.RefundService;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +17,23 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class OrderCanceledEventHandler {
 
     private final RefundService refundService;
+    private final MessageService messageService;
 
-    @Async
-    @TransactionalEventListener(classes = OrderCanceledEvent.class, phase = TransactionPhase.AFTER_COMMIT)
-//    @EventListener(OrderCanceledEvent.class)
+    @EventListener(OrderCanceledEvent.class)
     public void handle(OrderCanceledEvent orderCanceledEvent) {
         refundService.refund(orderCanceledEvent);
+    }
+
+    @Async
+    @TransactionalEventListener(classes = OrderCanceledAsyncEvent.class, phase = TransactionPhase.AFTER_COMMIT)
+//    @EventListener(OrderCanceledEvent.class)
+    public void handleAsync(OrderCanceledAsyncEvent orderCanceledEvent) {
+        refundService.refundAsync(orderCanceledEvent);
+    }
+
+    @Async
+    @TransactionalEventListener(classes = OrderCanceledMessageEvent.class, phase = TransactionPhase.AFTER_COMMIT)
+    public void handleMessage(OrderCanceledMessageEvent orderCanceledEvent) {
+        messageService.sendMessage(orderCanceledEvent);
     }
 }

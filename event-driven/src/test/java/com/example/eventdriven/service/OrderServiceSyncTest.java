@@ -11,10 +11,11 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatRuntimeException;
 
 @SpringBootTest
-public class OrderServiceTest {
+public class OrderServiceSyncTest {
 
     @Autowired
     private OrderService orderService;
@@ -35,14 +36,13 @@ public class OrderServiceTest {
 
     @Test
     @DisplayName("주문 취소 성공 테스트")
-    void successCancelOrderTest() throws InterruptedException {
+    void successCancelOrderTest() {
         // given
         Order order = orderRepository.findTop1ByOrderByIdDesc();
 
         // when
-        orderService.cancel(order.getId(), false);
+        orderService.cancel(order.getId(), false, false);
 
-//        Thread.sleep(1000);
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
@@ -53,19 +53,17 @@ public class OrderServiceTest {
 
     @Test
     @DisplayName("주문 취소 실패 테스트")
-    void failCancelOrderTest() throws InterruptedException {
+    void failCancelOrderTest() {
         // given
         Order order = orderRepository.findTop1ByOrderByIdDesc();
 
         // when
-        orderService.cancel(order.getId(), true);
-
-//        Thread.sleep(1000);
+        assertThatRuntimeException().isThrownBy(() -> orderService.cancel(order.getId(), false, true));
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
         RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
-        assertThat(orderResult).isNull();
+        assertThat(orderResult).isNotNull();
         assertThat(refundLog).isNull();
     }
 }
