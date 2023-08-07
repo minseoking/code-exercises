@@ -46,7 +46,7 @@ public class OrderServiceAsyncTest {
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
-        RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
+        RefundLog refundLog = refundLogRepository.findByOrderId(order.getId());
         assertThat(orderResult).isNull();
         assertThat(refundLog).isNotNull();
     }
@@ -58,14 +58,18 @@ public class OrderServiceAsyncTest {
         Order order = orderRepository.findTop1ByOrderByIdDesc();
 
         // when
-        orderService.cancel(order.getId(), true, true);
+        assertThatRuntimeException().isThrownBy(() -> orderService.cancel(order.getId(), true, true));
 
         Thread.sleep(1000);
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
-        RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
-        assertThat(orderResult).isNull();
-        assertThat(refundLog).isNotNull();
+        RefundLog refundLog = refundLogRepository.findByOrderId(order.getId());
+
+        assertThat(orderResult).isNotNull();
+        assertThat(refundLog).isNull();
+        // EventListener 결과
+        // assertThat(orderResult).isNotNull();
+        // assertThat(refundLog).isNotNull();
     }
 }

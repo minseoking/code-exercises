@@ -26,7 +26,7 @@ public class OrderCanceledEventHandler {
 
     @Async
     @TransactionalEventListener(classes = OrderCanceledAsyncEvent.class, phase = TransactionPhase.AFTER_COMMIT)
-//    @EventListener(OrderCanceledEvent.class)
+//    @EventListener(OrderCanceledAsyncEvent.class)
     public void handleAsync(OrderCanceledAsyncEvent orderCanceledEvent) {
         refundService.refundAsync(orderCanceledEvent);
     }

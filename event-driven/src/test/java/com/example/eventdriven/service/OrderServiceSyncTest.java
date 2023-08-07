@@ -46,7 +46,7 @@ public class OrderServiceSyncTest {
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
-        RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
+        RefundLog refundLog = refundLogRepository.findByOrderId(order.getId());
         assertThat(orderResult).isNull();
         assertThat(refundLog).isNotNull();
     }
@@ -62,7 +62,7 @@ public class OrderServiceSyncTest {
 
         // then
         Order orderResult = orderRepository.findById(order.getId()).orElse(null);
-        RefundLog refundLog = refundLogRepository.findTop1ByOrderByIdDesc();
+        RefundLog refundLog = refundLogRepository.findByOrderId(order.getId());
         assertThat(orderResult).isNotNull();
         assertThat(refundLog).isNull();
     }

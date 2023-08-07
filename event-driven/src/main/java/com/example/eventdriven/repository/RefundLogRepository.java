@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RefundLogRepository extends JpaRepository<RefundLog, Long> {
 
-    RefundLog findTop1ByOrderByIdDesc();
+    RefundLog findByOrderId(Long orderId);
 }

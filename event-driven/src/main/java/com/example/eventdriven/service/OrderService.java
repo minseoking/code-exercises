@@ -17,15 +17,20 @@ public class OrderService {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
-    public void cancel(Long orderId, boolean isAsync , boolean isThrowException) {
+    public void cancel(Long orderId, boolean isAsync, boolean isThrowException) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 주문이 존재하지 않습니다."));
-        orderRepository.delete(order);
+
         if (isAsync) {
             applicationEventPublisher.publishEvent(new OrderCanceledAsyncEvent(orderId, isThrowException));
         } else {
             applicationEventPublisher.publishEvent(new OrderCanceledEvent(orderId, isThrowException));
         }
 
+        if (isThrowException) {
+            throw new RuntimeException();
+        }
+
+        orderRepository.delete(order);
     }
 }
