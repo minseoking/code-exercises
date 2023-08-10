@@ -1,0 +1,7 @@
+license :
+  create :
+    message :  "Licencia creada %s"
+  update :
+    message :  "Licencia %s creada"
+  delete :
+    message :  "Elimiando licencia con id %s para la organization %s license"
