@@ -26,8 +26,8 @@ public class SpringMsaApplication {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-        source.setBasenames("message");
         source.setUseCodeAsDefaultMessage(true);
+        source.setBasenames("messages");
         return source;
     }
 }
