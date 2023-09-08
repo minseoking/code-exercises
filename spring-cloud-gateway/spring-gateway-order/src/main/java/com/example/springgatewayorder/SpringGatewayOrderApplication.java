@@ -16,7 +16,7 @@ public class SpringGatewayOrderApplication {
         SpringApplication.run(SpringGatewayOrderApplication.class, args);
     }
 
-    @GetMapping("/info")
+    @GetMapping("/order/info")
     public String info(@Value("${server.port}") String port) {
         return "order service port : " + port;
     }
