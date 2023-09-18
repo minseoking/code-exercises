@@ -1,20 +1,17 @@
-package com.example.sagapattern.choreography.core.command;
+package com.example.sagapattern.orchestration.core.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.math.BigDecimal;
 
 @Getter
 @AllArgsConstructor
-public class CreateOrderCommand {
+public class OrderCreatedEvent {
 
-    @TargetAggregateIdentifier
     private String orderId;
     private String type;
-    private BigDecimal price;
     private String currency;
     private String status;
-
+    private BigDecimal price;
 }

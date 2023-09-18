@@ -1,8 +1,8 @@
-package com.example.sagapattern.choreography.order.service;
+package com.example.sagapattern.orchestration.order.service;
 
 
-import com.example.sagapattern.choreography.core.command.CreateOrderCommand;
-import com.example.sagapattern.choreography.order.dto.OrderCreateDto;
+import com.example.sagapattern.orchestration.core.command.CreateOrderCommand;
+import com.example.sagapattern.orchestration.order.dto.OrderCreateDto;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;

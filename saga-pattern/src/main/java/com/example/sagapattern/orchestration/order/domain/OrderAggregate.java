@@ -1,10 +1,10 @@
-package com.example.sagapattern.choreography.order.domain;
+package com.example.sagapattern.orchestration.order.domain;
 
 
-import com.example.sagapattern.choreography.core.command.CreateOrderCommand;
-import com.example.sagapattern.choreography.core.command.UpdateOrderStatusCommand;
-import com.example.sagapattern.choreography.core.event.OrderUpdatedEvent;
-import com.example.sagapattern.choreography.core.event.OrderCreatedEvent;
+import com.example.sagapattern.orchestration.core.command.CreateOrderCommand;
+import com.example.sagapattern.orchestration.core.command.UpdateOrderStatusCommand;
+import com.example.sagapattern.orchestration.core.event.OrderUpdatedEvent;
+import com.example.sagapattern.orchestration.core.event.OrderCreatedEvent;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;

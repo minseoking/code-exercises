@@ -1,4 +1,4 @@
-package com.example.sagapattern.choreography.core.event;
+package com.example.sagapattern.orchestration.order.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,11 +7,8 @@ import java.math.BigDecimal;
 
 @Getter
 @AllArgsConstructor
-public class OrderCreatedEvent {
-
-    private String orderId;
+public class OrderCreateDto {
     private String type;
     private String currency;
-    private String status;
     private BigDecimal price;
 }

@@ -1,10 +1,10 @@
-package com.example.sagapattern.choreography.order.saga;
+package com.example.sagapattern.orchestration.order.saga;
 
-import com.example.sagapattern.choreography.core.command.UpdateOrderStatusCommand;
-import com.example.sagapattern.choreography.core.event.InvoiceCreatedEvent;
-import com.example.sagapattern.choreography.core.event.OrderUpdatedEvent;
-import com.example.sagapattern.choreography.core.command.CreateInvoiceCommand;
-import com.example.sagapattern.choreography.core.event.OrderCreatedEvent;
+import com.example.sagapattern.orchestration.core.command.UpdateOrderStatusCommand;
+import com.example.sagapattern.orchestration.core.event.InvoiceCreatedEvent;
+import com.example.sagapattern.orchestration.core.event.OrderUpdatedEvent;
+import com.example.sagapattern.orchestration.core.command.CreateInvoiceCommand;
+import com.example.sagapattern.orchestration.core.event.OrderCreatedEvent;
 import jakarta.persistence.Transient;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;

@@ -1,7 +1,7 @@
-package com.example.sagapattern.choreography.order.controller;
+package com.example.sagapattern.orchestration.order.controller;
 
-import com.example.sagapattern.choreography.order.dto.OrderCreateDto;
-import com.example.sagapattern.choreography.order.service.OrderService;
+import com.example.sagapattern.orchestration.order.dto.OrderCreateDto;
+import com.example.sagapattern.orchestration.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

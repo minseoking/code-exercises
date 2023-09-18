@@ -1,4 +1,4 @@
-package com.example.sagapattern.choreography.core.event;
+package com.example.sagapattern.orchestration.core.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

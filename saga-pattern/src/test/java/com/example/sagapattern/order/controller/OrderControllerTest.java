@@ -1,6 +1,6 @@
 package com.example.sagapattern.order.controller;
 
-import com.example.sagapattern.choreography.order.dto.OrderCreateDto;
+import com.example.sagapattern.orchestration.order.dto.OrderCreateDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;

@@ -1,7 +1,7 @@
-package com.example.sagapattern.choreography.pay.domain;
+package com.example.sagapattern.orchestration.pay.domain;
 
-import com.example.sagapattern.choreography.core.command.CreateInvoiceCommand;
-import com.example.sagapattern.choreography.core.event.InvoiceCreatedEvent;
+import com.example.sagapattern.orchestration.core.command.CreateInvoiceCommand;
+import com.example.sagapattern.orchestration.core.event.InvoiceCreatedEvent;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;

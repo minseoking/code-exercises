@@ -1,4 +1,4 @@
-package com.example.sagapattern.choreography.core.command;
+package com.example.sagapattern.orchestration.core.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,9 +6,9 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 @Getter
 @AllArgsConstructor
-public class CreateInvoiceCommand {
+public class UpdateOrderStatusCommand {
 
     @TargetAggregateIdentifier
-    private String paymentId;
     private String orderId;
+    private String orderStatus;
 }
