@@ -1,0 +1,15 @@
+version: 2.12.0
+services:
+  database:
+    image: minseoklee98/spring-msa-0.0.1
+    ports:
+      - "8080:8080"
+    environment:
+        - SPRING_PROFILES_ACTIVE=local
+    networks:
+      backend:
+        aliases:
+          - database
+networks:
+    backend:
+        driver: bridge
