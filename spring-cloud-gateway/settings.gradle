@@ -1,0 +1,4 @@
+rootProject.name = 'spring-cloud-gateway'
+include 'discovery-server'
+include 'spring-gateway'
+include 'spring-gateway-order'
