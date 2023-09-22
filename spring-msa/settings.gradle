@@ -1,1 +1,3 @@
 rootProject.name = 'spring-msa'
+include 'licensing-service'
+include 'config-server'
